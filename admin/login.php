@@ -3,7 +3,7 @@
 
 	include("../params.php");
 
-	if (isset($_SESSION['connected']) AND $_GET['action'] == "logout") {
+	if (!empty($_SESSION['connected']) AND isset($_GET['action']) AND $_GET['action'] == "logout") {
 		session_destroy();
 		header("Location: index.php");
 	}
