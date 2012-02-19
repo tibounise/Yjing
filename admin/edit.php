@@ -25,12 +25,21 @@
 		}
 		elseif ($action == "edit_article" AND !empty($_GET['article']) AND preg_match("#^[0-9]+$#", $_GET["article"])) {
 			$article = getArticle($_GET['article'],"../".$datafile_url);
-			$page = "<h1>Edit an article</h1><br /><form class=\"form-horizontal\" action=\"edit.php?edit_article_processing\" method=\"POST\"><fieldset>";
-			$page .= "<div class=\"control-group\"><label class=\"control-label\">Name of the article : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"title\" value=\"" . $article[0] . "\" name=\"title\"></div></div>";
+			$page = "<h1>Edit an article</h1><br /><form class=\"form-horizontal\" action=\"edit.php?action=edit_article_processing\" method=\"POST\"><fieldset>";
+			$page .= "<input type=\"hidden\" name=\"id\" value=\"" . $_GET['article'] . "\">";
+			$page .= "<div class=\"control-group\"><label class=\"control-label\">Name of the article : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"title\" value=\"" . html_entity_decode($article[0]) . "\" name=\"title\"></div></div>";
 			$page .= "<div class=\"control-group\"><label class=\"control-label\">Author : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"title\" value=\"" . $article[3] . "\" name=\"title\"></div></div>";
 			$page .= "<div class=\"control-group\"><label class=\"control-label\">Pubdate : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"title\" value=\"" . $article[2] . "\" name=\"title\"></div></div>";
 			$page .= "<div class=\"control-group\"><label class=\"control-label\">Content : </label><div class=\"controls\"><textarea name=\"content\" class=\"span6\" rows=\"15\">" . html_entity_decode($article[1]) . "</textarea></div></div>";
+			$page .= "<div class=\"control-group\"><div class=\"controls\"><button type=\"submit\" class=\"btn btn-success\">Save changes</button></div></div>";
 			$page .= "</fieldset></form>";
+		}
+		elseif ($action == "edit_article_processing") {
+			$article = getArticle($_POST['id'],"../".$datafile_url);
+			$xml = openFile("../".$datafile_url);
+			str_replace($article[1], htmlentities($_POST["content"]), $xml);
+			str_replace($article[0], htmlentities($_POST["title"]), $xml);
+			$page = $xml;
 		}
 		include("design.html");
 	}
