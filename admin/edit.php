@@ -10,7 +10,7 @@
 		if ($action == "list_article") {
 			$xml = new simpleXMLElement(file_get_contents("../" . $datafile_url));
 
-			$page = "<table class=\"table\"><thead><tr><th>#</th><th>Title</th><th>Pubdate</th><th>Author</th></tr></thead><tbody>";
+			$page = "<h1>Choose an article to edit.</h1><table class=\"table\"><thead><tr><th>#</th><th>Title</th><th>Pubdate</th><th>Author</th></tr></thead><tbody>";
 
 			foreach ($xml->article as $output) {
 				$page .= "<tr>";
@@ -25,6 +25,9 @@
 		}
 		elseif ($action == "edit_article" AND !empty($_GET['article']) AND preg_match("#^[0-9]+$#", $_GET["article"])) {
 			$article = getArticle($_GET['article'],"../".$datafile_url);
+			$page = "<form class=\"form-horizontal\" action=\"edit.php?edit_article_processing\" method=\"POST\"><fieldset>";
+			$page .= "<div class=\"control-group\"><label class=\"control-label\" for=\"title\">Name of the article : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"title\" value=\"" . $article[0] . "\"></div></div>";
+			$page .= "</fieldset></form>";
 		}
 		include("design.html");
 	}
