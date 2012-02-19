@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+	<title>Yjing - Administation</title>
+	<link rel="stylesheet" href="design.css">
+	<link rel="stylesheet" href="bootstrap.min.css">
+</head>
+<body>
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<a class="brand" href="index.php">Yjing - Administration</a>
+				<div class="nav-collapse">
+					<p class="navbar-text pull-right"><a href="login.php?action=logout">Log out</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span2">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">Articles</li>
+              <li><a href="#">New article</a></li>
+              <li><a href="#">Edit article</a></li>
+              <li><a href="#">Delete article</a></li>
+              <li class="nav-header">Page</li>
+              <li><a href="#">New page</a></li>
+              <li><a href="#">Edit page</a></li>
+              <li><a href="#">Delete page</a></li>
+              <li class="nav-header">Site</li>
+              <li><a href="#">Configuration</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="span10">
+          <?php echo $page; ?>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>Yjing <?php echo $yjing_version; ?> - http://github.com/tibounise/Yjing</p>
+      </footer>
+
+    </div>
+</body>
+</html>
