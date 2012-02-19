@@ -1,8 +1,8 @@
 <!doctype html>
 <html>
 <head>
-	<title><?php echo $title_site; ?></title>
-	<link rel="stylesheet" href="themes/<?php echo $actual_theme; ?>/bootstrap.min.css">
+	<title><site_title></title>
+	<link rel="stylesheet" href="themes/twitter_bootstrap/bootstrap.min.css">
 	<style type="text/css">
 		body {
 			padding-top: 60px;
@@ -14,10 +14,10 @@
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a class="brand" href="#"><?php echo $title_site; ?></a>
+				<a class="brand" href="index.php"><site_title></a>
 				<div class="nav-collapse">
             		<ul class="nav">
-              			<?php echo $navigation_bar_content; ?>
+              			<navigation_bar_content>
             		</ul>
           		</div>
 			</div>
@@ -25,7 +25,7 @@
 	</div>
 
 	<div class="container">
-		<?php echo $article_content; ?>
+		<page_content>
 	</div>
 </body>
 </html>
