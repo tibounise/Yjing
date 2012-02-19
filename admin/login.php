@@ -3,16 +3,16 @@
 
 	include("../params.php");
 
-	if ($_SESSION['connected'] AND $_GET['action'] == "logout") {
+	if (isset($_SESSION['connected']) AND $_GET['action'] == "logout") {
 		session_destroy();
 		header("Location: index.php");
 	}
 
-	elseif ($_SESSION['connected']) {
+	elseif (isset($_SESSION['connected'])) {
 		header("Location: index.php");
-	}
+	} 
 
-	elseif ($_POST['username'] != "" AND $_POST['password'] !="") {
+	elseif (!empty($_POST['username']) AND !empty($_POST['password'])) {
 		if ($_POST['username'] == $login[0] AND md5($_POST['password']) == $login[1]) {
 			$_SESSION['connected'] = true;
 			$_SESSION['try'] = 0;
@@ -25,7 +25,7 @@
 
 	}
 
-	elseif ($_POST['submit'] AND ($_POST['username'] == "" OR $_POST['password'] == "")) {
+	elseif (isset($_POST['submit']) AND (empty($_POST['username']) OR empty($_POST['password']))) {
 		header("Location: login.php?error=notenough");
 	}
 
@@ -72,18 +72,18 @@
 		</head>
 		<body>
 			<?php
-				if ($_SESSION['try'] < $numberoftry) {
+				if (!isset($_SESSION['try']) OR $_SESSION['try'] <= $numberoftry) {
 			?>
 			<div id="caption">
 			<p>
 				<?php
-					if ($_GET["error"] == "notenough") {
+					if (isset($_GET['error']) AND $_GET["error"] == "notenough") {
 						echo "You didn't have filled enough fields.";
 					}
-					elseif ($_GET["error"] == "badlogin") {
+					elseif (isset($_GET['error']) AND $_GET["error"] == "badlogin") {
 						echo "Your login is wrong.";
 					}
-					elseif ($_GET["error"] == "bear") {
+					elseif (isset($_GET['error']) AND $_GET["error"] == "bear") {
 						echo "Your face is bear.";
 					}
 					else {

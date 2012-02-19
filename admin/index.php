@@ -4,7 +4,7 @@
 	include("../functions.php");
 	include("../params.php");
 
-	if (!$_SESSION['connected']) {
+	if (!isset($_SESSION['connected'])) {
 		header('Location: login.php');
 	}
 	else {
