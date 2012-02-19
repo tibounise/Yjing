@@ -25,8 +25,11 @@
 		}
 		elseif ($action == "edit_article" AND !empty($_GET['article']) AND preg_match("#^[0-9]+$#", $_GET["article"])) {
 			$article = getArticle($_GET['article'],"../".$datafile_url);
-			$page = "<form class=\"form-horizontal\" action=\"edit.php?edit_article_processing\" method=\"POST\"><fieldset>";
-			$page .= "<div class=\"control-group\"><label class=\"control-label\" for=\"title\">Name of the article : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"title\" value=\"" . $article[0] . "\"></div></div>";
+			$page = "<h1>Edit an article</h1><br /><form class=\"form-horizontal\" action=\"edit.php?edit_article_processing\" method=\"POST\"><fieldset>";
+			$page .= "<div class=\"control-group\"><label class=\"control-label\">Name of the article : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"title\" value=\"" . $article[0] . "\" name=\"title\"></div></div>";
+			$page .= "<div class=\"control-group\"><label class=\"control-label\">Author : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"title\" value=\"" . $article[3] . "\" name=\"title\"></div></div>";
+			$page .= "<div class=\"control-group\"><label class=\"control-label\">Pubdate : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"title\" value=\"" . $article[2] . "\" name=\"title\"></div></div>";
+			$page .= "<div class=\"control-group\"><label class=\"control-label\">Content : </label><div class=\"controls\"><textarea name=\"content\" class=\"span6\" rows=\"15\">" . html_entity_decode($article[1]) . "</textarea></div></div>";
 			$page .= "</fieldset></form>";
 		}
 		include("design.html");
