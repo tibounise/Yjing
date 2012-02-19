@@ -25,7 +25,7 @@
 
 	}
 
-	elseif ($_POST['submit'] AND $_POST['username'] == "" OR $_POST['password'] == "") {
+	elseif ($_POST['submit'] AND ($_POST['username'] == "" OR $_POST['password'] == "")) {
 		header("Location: login.php?error=notenough");
 	}
 
@@ -96,7 +96,7 @@
 				<div id="form">
 					<p>Username : <input type="text" name="username" /></p>
 					<p>Password : <input type="password" name="password" /></p>
-					<input type="submit" value="Log in !" />
+					<input type="submit" name="submit" value="Log in !" />
 				</div>
 			</form>
 			<?php
