@@ -6,7 +6,7 @@ include "themes/" . $actual_theme . "/theme.php";
 
 $site_infos = getSiteInfos($datafile_url);
 
-if (preg_match("#^[0-9]+$#", $_GET["article"])) {
+if (isset($_GET['article']) AND preg_match("#^[0-9]+$#", $_GET["article"])) {
 
 	$article = getArticle($_GET["article"], $datafile_url);
 
@@ -14,7 +14,7 @@ if (preg_match("#^[0-9]+$#", $_GET["article"])) {
 
 }
 
-elseif (preg_match("#^[0-9]+$#", $_GET["page"])) {
+elseif (isset($_GET["page"]) AND preg_match("#^[0-9]+$#", $_GET["page"])) {
 
 	$page = getArticle($_GET["page"], $datafile_url);
 

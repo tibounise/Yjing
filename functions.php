@@ -34,10 +34,12 @@ function getSiteInfos($database) {
 function openFile($url) {
 	if (file_exists($url)) {
 		$file = fopen($url,"r");
+		$output = "";
 		while (!feof ($file))
 			{
-				$buffer = fgets($file, 4096);
-				$output = $output . $buffer;
+				$buffer1 = fgets($file, 4096);
+				$buffer2 = $output . $buffer1;
+				$output = $buffer2;
   			}
   		fclose($file);
   	}
