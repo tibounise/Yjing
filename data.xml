@@ -1,0 +1,15 @@
+<data>
+	<title>Nom du site</title>
+	<url>http://monsite.com</url>
+	<page>
+		<key>1</key>
+		<content>&lt;p&gt;Bonjour&lt;/p&gt;</content>
+	</page>
+	<article>
+		<key>1</key>
+		<title>Nom de l'article numéro 1</title>
+		<content>&lt;p&gt;Bonjour&lt;/p&gt;</content>
+		<pubdate>XX-XX-XXXX</pubdate>
+		<author>TiBounise</author>
+	</article>
+</data>

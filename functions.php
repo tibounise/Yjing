@@ -17,6 +17,23 @@ function getArticle($key,$database) {
 	}
 }
 
+function getPage($key,$database) {
+	$file = curl_init();
+	curl_setopt($file,CURLOPT_URL, $database);
+	curl_setopt($file,CURLOPT_RETURNTRANSFER, true);
+	$content = curl_exec($file);
+
+	$xml = new simpleXMLElement($content);
+
+	// $xml->author[0];
+
+	foreach ($xml->page as $output) {
+		if ($output->key == $key) {
+			return array(0 => $output->content);
+		}
+	}
+}
+
 function getSiteInfos($database) {
 	$file = curl_init();
 	curl_setopt($file,CURLOPT_URL, $database);
