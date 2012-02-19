@@ -1,12 +1,8 @@
 <?php
 
 function getArticle($key,$database) {
-	$file = curl_init();
-	curl_setopt($file,CURLOPT_URL, $database);
-	curl_setopt($file,CURLOPT_RETURNTRANSFER, true);
-	$content = curl_exec($file);
 
-	$xml = new simpleXMLElement($content);
+	$xml = new simpleXMLElement(file_get_contents($database));
 
 	foreach ($xml->article as $output) {
 		if ($output->key == $key) {
@@ -16,12 +12,8 @@ function getArticle($key,$database) {
 }
 
 function getPage($key,$database) {
-	$file = curl_init();
-	curl_setopt($file,CURLOPT_URL, $database);
-	curl_setopt($file,CURLOPT_RETURNTRANSFER, true);
-	$content = curl_exec($file);
 
-	$xml = new simpleXMLElement($content);
+	$xml = new simpleXMLElement(file_get_contents($database));
 
 	// $xml->author[0];
 
@@ -33,12 +25,8 @@ function getPage($key,$database) {
 }
 
 function getSiteInfos($database) {
-	$file = curl_init();
-	curl_setopt($file,CURLOPT_URL, $database);
-	curl_setopt($file,CURLOPT_RETURNTRANSFER, true);
-	$content = curl_exec($file);
 
-	$xml = new simpleXMLElement($content);
+	$xml = new simpleXMLElement(file_get_contents($database));
 
 	return array(0 => $xml->title[0], 1 => $xml->url[0]);
 }

@@ -14,6 +14,14 @@ if (preg_match("#^[0-9]+$#", $_GET["article"])) {
 
 }
 
+elseif (preg_match("#^[0-9]+$#", $_GET["page"])) {
+
+	$page = getArticle($_GET["page"], $datafile_url);
+
+	echo showPage($site_infos[0],$navigation_bar_content,$page[0]);
+
+}
+
 else {
 
 	$page = getPage("1", $datafile_url);
