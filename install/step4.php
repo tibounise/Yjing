@@ -4,13 +4,11 @@
 
 	$xml = new simpleXMLElement(file_get_contents("../data.xml"));
 
-	foreach ($xml->config as $output) {
-		$output->title = htmlentities($_POST['title']);
-	}
+	$xml->config->title = htmlentities($_POST['title']);
 
 	$buffer = $xml->asXML();
-	unlink("../" . $datafile_url);
-	$file = fopen("../" . $datafile_url,"w");
+	unlink("../data.xml");
+	$file = fopen("../data.xml","w");
 	fputs($file,$buffer);
 	fclose($file);
 
