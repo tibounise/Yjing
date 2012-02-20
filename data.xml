@@ -2,7 +2,7 @@
 <data>
 	<config>
 		<title>Nom du site</title>
-		<sidebar>&lt;li&gt;&lt;a href=\&quot;#about\&quot;&gt;About&lt;/a&gt;&lt;/li&gt;</sidebar>
+		<sidebar>&lt;li&gt;&lt;a href=&quot;#about&quot;&gt;About&lt;/a&gt;&lt;/li&gt;</sidebar>
 	</config>
 	<page>
 		<key>1</key>
