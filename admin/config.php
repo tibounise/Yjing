@@ -14,7 +14,7 @@
 			
 			$page .= "<div class=\"control-group\"><label class=\"control-label\">Theme options : </label><div class=\"controls\"><select name=\"theme\">";
 
-			$page .= scanDirectory("../themes");
+			$page .= scanDirectory("../themes",$config_get[2]);
 
 			$page .= "</select></div></div>";
 

@@ -28,7 +28,7 @@ function getSiteInfos($database) {
 
 	$xml = new simpleXMLElement(file_get_contents($database));
 
-	return array(0 => $xml->config->title[0], 1 => $xml->config->sidebar[0]);
+	return array(0 => $xml->config->title[0], 1 => $xml->config->sidebar[0], 2 => $xml->config->theme[0]);
 }
 
 function openFile($url) {
@@ -49,12 +49,17 @@ function openFile($url) {
 	return $output;
 }
 
-function scanDirectory($Directory){
+function scanDirectory($Directory,$actual_theme){
 	$result = "";
 	$MyDirectory = opendir($Directory) or die('Erreur');
 	while($Entry = @readdir($MyDirectory)) {
 		if(is_dir($Directory.'/'.$Entry)&& $Entry != '.' && $Entry != '..') {
-			$result .= "<option value=\"" . $Entry . "\">" . $Entry . "</select>";
+			if ($Entry == $actual_theme) {
+				$result .= "<option selected=\"selected\" value=\"" . $Entry . "\">" . $Entry . "</select>";
+			}
+			else {
+				$result .= "<option value=\"" . $Entry . "\">" . $Entry . "</select>";
+			}
 		}
 	}
 	closedir($MyDirectory);
