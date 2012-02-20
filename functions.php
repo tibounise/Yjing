@@ -4,43 +4,37 @@ function getArticle($key,$database) {
 
 	$xml = new simpleXMLElement(file_get_contents($database));
 
-	$state = true;
+	$state = "nil";
 
 	foreach ($xml->article as $output) {
 		if ($output->key == $key) {
-			$state = false;
-			return array(0 => $output->title, 1 => $output->content, 2 => $output->pubdate, 3 => $output->author);
+			$state = array(0 => $output->title, 1 => $output->content, 2 => $output->pubdate, 3 => $output->author);
 		}
 	}
-
-	if ($state == true) {
-		return true;
-	}
+	
+	return $state;
 }
 
 function getPage($key,$database) {
 
 	$xml = new simpleXMLElement(file_get_contents($database));
 
-	$state = false;
+	$state = true;
 
 	foreach ($xml->page as $output) {
 		if ($output->key == $key) {
-			$state = true;
-			return array(0 => $output->content);
+			$state = array(0 => $output->content);
 		}
 	}
 
-	if (!$state) {
-		return false;
-	}
+	return $state;
 }
 
 function getSiteInfos($database) {
 
 	$xml = new simpleXMLElement(file_get_contents($database));
 
-	return array(0 => $xml->config->title[0], 1 => $xml->config->sidebar[0], 2 => $xml->config->theme[0]);
+	return array(0 => $xml->config->title[0], 1 => $xml->config->sidebar[0], 2 => $xml->config->theme[0], 3 => $xml->config->error404[0], 4 => $xml->config->error403[0]);
 }
 
 function openFile($url) {
