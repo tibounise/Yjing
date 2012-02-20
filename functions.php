@@ -52,13 +52,13 @@ function openFile($url) {
 function scanDirectory($Directory,$actual_theme){
 	$result = "";
 	$MyDirectory = opendir($Directory) or die('Erreur');
-	while($Entry = @readdir($MyDirectory)) {
-		if(is_dir($Directory.'/'.$Entry)&& $Entry != '.' && $Entry != '..') {
+	while($Entry = readdir($MyDirectory)) {
+		if ($Entry != "." AND $Entry != "..") {
 			if ($Entry == $actual_theme) {
-				$result .= "<option selected=\"selected\" value=\"" . $Entry . "\">" . $Entry . "</select>";
+				$result .= "<option selected=\"selected\" value=\"" . $Entry . "\">" . $Entry . "</option>";
 			}
 			else {
-				$result .= "<option value=\"" . $Entry . "\">" . $Entry . "</select>";
+				$result .= "<option value=\"" . $Entry . "\">" . $Entry . "</option>";
 			}
 		}
 	}

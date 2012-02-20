@@ -28,6 +28,7 @@
 			foreach ($xml->config as $output) {
 				$output->title = htmlentities($_POST['name']);
 				$output->sidebar = htmlentities($_POST['sidebar']);
+				$output->theme = $_POST['theme'];
 			}
 			
 			$buffer = $xml->asXML();
