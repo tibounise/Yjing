@@ -12,6 +12,7 @@
 	fputs($file,$buffer);
 	fclose($file);
 
+	$file = false;
 	$file = fopen("../params.php","r");
 	$output = "";
 	while (!feof ($file)) {
