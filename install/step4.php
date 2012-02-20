@@ -12,6 +12,21 @@
 	fputs($file,$buffer);
 	fclose($file);
 
+	$file = fopen("../params.php","r");
+	$output = "";
+	while (!feof ($file)) {
+		$buffer1 = fgets($file, 4096);
+		$buffer2 = $output . $buffer1;
+		$output = $buffer2;
+  	}
+  	fclose($file);
+
+  	str_replace(array("0 => \"<username>\"","1 => \"<password>\""), array("0 => \"" . $_SESSION['username'] . "\"","1 => \"" . md5($_SESSION['password']) . "\"", $output);
+  	unlink("../params.php");
+	$file = fopen("../params.php","w");
+	fputs($file,$buffer);
+	fclose($file);
+
 ?>
 <!doctype html>
 <html>
