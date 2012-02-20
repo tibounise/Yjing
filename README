@@ -4,8 +4,12 @@
 Developpement by ayme32 and TiBounise. Thank's to skywodd for his
 help !
 
-Yjing is lienced under GNU GPL v3.
-
 We're still writing this project, so be patient ! We'll be soon
-writing an installer for it, as soon as we start the administation
+writing an installer for it, as soon as we finish the administation
 part.
+
+== Licence ==
+
+Yjing is released under GNU GPL v3 licence.
+
+Yjing use the Twitter Bootstrap, which is under Apache Licence 2.0.
