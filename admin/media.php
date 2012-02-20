@@ -5,12 +5,23 @@
 	include("../params.php");
 	include("../functions.php");
 
-	if (isset($_SESSION['connected']) AND $_SESSION['connected'] == true) {
-		if ($_GET['action'] == "upload_file") {
-			$page = "<h1>Upload a media</h1><br /><form class=\"form-horizontal\" action=\"media.php\" method=\"POST\" enctype=\"multipart/form-data\"><fieldset>";
-			$page .= "<div class=\"control-group\"><label class=\"control-label\">File : </label><div class=\"controls\"><input type=\"file\" class=\"input-file span6\" id=\"img\" name=\"img\"><p class=\"help-block\">For your security, Yjing accepts only by default Jpeg, Gif, Png, Mp3, Mp4, Avi, WebM and Ogg files.</p></div></div>";
-			$page .= "<div class=\"control-group\"><div class=\"controls\"><button type=\"submit\" class=\"btn btn-info\">Upload</button></div></div>";
+	if (isset($_SESSION['connected']) AND !empty($_GET['action']) AND $_SESSION['connected'] == true) {
+		$action = $_GET['action'];
+		if ($action == "add_media") {
+			$page = "<h1>Upload an image</h1><br /><form class=\"form-horizontal\" action=\"media.php?action=add_media_processing\" method=\"POST\" enctype=\"multipart/form-data\"><fieldset>";
+			$page .= "<div class=\"control-group\"><label class=\"control-label\">Image : </label><div class=\"controls\"><input type=\"file\" class=\"span6\" id=\"media\" name=\"media\"><p class=\"help-block\">For your security, Yjing accepts only by default Jpeg, Gif, Png, Mp3, Mp4, Avi, WebM and Ogg files.</p></div></div>";
+			$page .= "<div class=\"control-group\"><div class=\"controls\"><button type=\"submit\" class=\"btn btn-success\">Upload</button></div></div>";
 			$page .= "</fieldset></form>";
+		}
+		elseif ($action == "add_media_processing" AND !empty($_FILES)) {
+			$media = $_FILES['media'];
+			$ext = strtolower(pathinfo($_FILES['media']['name'], PATHINFO_EXTENSION));
+			if (preg_match("#jpg|jpeg|png|mp3|mp4|mpeg|avi|webm|ogg|swf#",$ext)) {
+				move_uploaded_file($media['tmp_name'],"../media/".$media['name']);
+				$page = "<p>Your media has been uploaded !</p><p><a href=\"index.php\" class=\"btn btn-warning\">Return to index</a></p>";
+			} else {
+				$page = "<p>Your media has not been uploaded. His extensions may not be in the list.</p><p><a href=\"index.php\" class=\"btn btn-warning\">Return to index</a></p>";
+			}
 		}
 
 		include("design.html");
