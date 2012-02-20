@@ -56,10 +56,11 @@
 		elseif ($action == "delete_article") {
 			$xml = new simpleXMLElement(file_get_contents("../" . $datafile_url));
 
-			$page = "<h1>Choose an article to delete it.</h1><table class=\"table\"><thead><tr><th>#</th><th>Title</th><th>Pubdate</th><th>Author</th></tr></thead><tbody>";
+			$page = "<h1>Choose an article to delete it.</h1><table class=\"table\"><thead><tr><th class=\"span1\"></th><th>#</th><th>Title</th><th>Pubdate</th><th>Author</th></tr></thead><tbody>";
 
 			foreach ($xml->article as $output) {
 				$page .= "<tr>";
+				$page .= "<td><a style=\"margin-top: -3px;\" class=\"close\" href=\"edit.php?action=delete_article_confirmation&article=". $output->key ."\">&times;</a></td>";
 				$page .= "<td>" . $output->key . "</td>";
 				$page .= "<td><a href=\"edit.php?action=delete_article_confirmation&article=". $output->key ."\">" . html_entity_decode($output->title) . "</a></td>";
 				$page .= "<td>" . $output->pubdate . "</td>";
