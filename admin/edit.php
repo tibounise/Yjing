@@ -51,7 +51,9 @@
 			$file = fopen("../" . $datafile_url,"w");
 			fputs($file,$buffer);
 			fclose($file);
-			$page = "<p>Your changes has been done !</p><p><a href=\"index.php\" class=\"btn btn-warning\">Return to index</a></p>";
+			$page = "<p>Your changes has been done !</p>";
+			$page .= "<p>Your article is available at : <strong><i>index.php?article=" . $_POST['id'] . "</i></strong>.</p>";
+			$page .= "<p><a href=\"index.php\" class=\"btn btn-warning\">Return to index</a></p>";
 		}
 		elseif ($action == "delete_article") {
 			$xml = new simpleXMLElement(file_get_contents("../" . $datafile_url));
@@ -129,7 +131,9 @@
 				$file = fopen("../" . $datafile_url,"w");
 				fputs($file,$buffer);
 				fclose($file);
-				$page = "<p>The article has been published.</p><p><a href=\"index.php\" class=\"btn btn-warning\">Return to index</a></p>";
+				$page = "<p>The article has been published.</p>";
+				$page .= "<p>Your article is available at : <strong><i>index.php?article=" . $id . "</i></strong>.</p>";
+				$page .= "<p><a href=\"index.php\" class=\"btn btn-warning\">Return to index</a></p>";
 			}
 			else {
 				$page = "<p>You havn't filled some fields.</p><p><a href=\"index.php\" class=\"btn btn-warning\">Return to index</a></p>";
@@ -172,7 +176,9 @@
 			$file = fopen("../" . $datafile_url,"w");
 			fputs($file,$buffer);
 			fclose($file);
-			$page = "<p>Your changes has been done !</p><p><a href=\"index.php\" class=\"btn btn-warning\">Return to index</a></p>";
+			$page = "<p>Your changes has been done !</p>";
+			$page .= "<p>Your article is available at : <strong><i>index.php?page=" . $_POST['id'] . "</i></strong>.</p>";
+			$page .= "<p><a href=\"index.php\" class=\"btn btn-warning\">Return to index</a></p>";
 		}
 		elseif ($action == "delete_page") {
 			$xml = new simpleXMLElement(file_get_contents("../" . $datafile_url));
@@ -205,7 +211,7 @@
 
 			$i = 0;
 
-			foreach ($xml->article as $output) {
+			foreach ($xml->page as $output) {
 				if ($output->key == $_GET['page']) {
 					unset($xml->page[$i]); break;
 				}
@@ -247,7 +253,9 @@
 				$file = fopen("../" . $datafile_url,"w");
 				fputs($file,$buffer);
 				fclose($file);
-				$page = "<p>The page has been published.</p><p><a href=\"index.php\" class=\"btn btn-warning\">Return to index</a></p>";
+				$page = "<p>The page has been published.</p>";
+				$page .= "<p>Your article is available at : <strong><i>index.php?page=" . $id . "</i></strong>.</p>";
+				$page .= "<p><a href=\"index.php\" class=\"btn btn-warning\">Return to index</a></p>";
 			}
 			else {
 				$page = "<p>You havn't filled some fields.</p><p><a href=\"index.php\" class=\"btn btn-warning\">Return to index</a></p>";

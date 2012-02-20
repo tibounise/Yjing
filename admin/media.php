@@ -18,7 +18,9 @@
 			$ext = strtolower(pathinfo($_FILES['media']['name'], PATHINFO_EXTENSION));
 			if (preg_match("#jpg|jpeg|png|mp3|mp4|mpeg|avi|webm|ogg|swf#",$ext)) {
 				move_uploaded_file($media['tmp_name'],"../media/".$media['name']);
-				$page = "<p>Your media has been uploaded !</p><p><a href=\"media.php?action=manage_media\" class=\"btn btn-warning\">Go to the media manager</a></p>";
+				$page = "<p>Your media has been uploaded !</p>";
+				$page .= "<p>Your media is available at : <strong><i>media/" . $media['name'] . "</i></strong>.</p>";
+				$page .= "<p><a href=\"media.php?action=manage_media\" class=\"btn btn-warning\">Go to the media manager</a></p>";
 			} else {
 				$page = "<p>Your media has not been uploaded. His extensions may not be in the list.</p><p><a href=\"index.php\" class=\"btn btn-warning\">Return to index</a></p>";
 			}
