@@ -22,10 +22,11 @@
   	}
   	fclose($file);
 
-  	str_replace(array("0 => \"<username>\"","1 => \"<password>\""), array("0 => \"" . $_SESSION['username'] . "\"","1 => \"" . md5($_SESSION['password'])) . "\"", $output);
-  	unlink("../params.php");
+  	$buffer_configs = str_replace("<username>", $_SESSION['username'], $output);
+	$buffer_configs = str_replace("<password>", md5($_SESSION['password']), $output);
+	unlink("../params.php");
 	$file = fopen("../params.php","w");
-	fputs($file,$buffer);
+	fputs($file,$buffer_configs);
 	fclose($file);
 
 ?>
@@ -73,9 +74,9 @@
 </body>
 </html>
 <?php
-	unlink("index.php");
+	/*unlink("index.php");
 	unlink("step2.php");
 	unlink("step3.php");
 	unlink("step4.php");
-	rmdir("../install");
+	rmdir("../install");*/
 ?>
