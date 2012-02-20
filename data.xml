@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <data>
 	<config>
-		<title>Nom du site</title>
-		<sidebar>&lt;li&gt;&lt;a href=&quot;#about&quot;&gt;About&lt;/a&gt;&lt;/li&gt;</sidebar>
+		<title>Title of the website</title>
+		<sidebar>&amp;lt;li&amp;gt;&amp;lt;a href=\&amp;quot;#&amp;gt;About&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;</sidebar>
 		<theme>twitter_bootstrap</theme>
 	</config>
 	<page>
