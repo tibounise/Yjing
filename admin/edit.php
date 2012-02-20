@@ -15,7 +15,7 @@
 			foreach ($xml->article as $output) {
 				$page .= "<tr>";
 				$page .= "<td>" . $output->key . "</td>";
-				$page .= "<td><a href=\"edit.php?action=edit_article&article=". $output->key ."\">" . $output->title . "</a></td>";
+				$page .= "<td><a href=\"edit.php?action=edit_article&article=". $output->key ."\">" . html_entity_decode($output->title) . "</a></td>";
 				$page .= "<td>" . $output->pubdate . "</td>";
 				$page .= "<td>" . $output->author . "</td>";
 				$page .= "</tr>";
@@ -28,18 +28,30 @@
 			$page = "<h1>Edit an article</h1><br /><form class=\"form-horizontal\" action=\"edit.php?action=edit_article_processing\" method=\"POST\"><fieldset>";
 			$page .= "<input type=\"hidden\" name=\"id\" value=\"" . $_GET['article'] . "\">";
 			$page .= "<div class=\"control-group\"><label class=\"control-label\">Name of the article : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"title\" value=\"" . html_entity_decode($article[0]) . "\" name=\"title\"></div></div>";
-			$page .= "<div class=\"control-group\"><label class=\"control-label\">Author : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"title\" value=\"" . $article[3] . "\" name=\"title\"></div></div>";
-			$page .= "<div class=\"control-group\"><label class=\"control-label\">Pubdate : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"title\" value=\"" . $article[2] . "\" name=\"title\"></div></div>";
+			$page .= "<div class=\"control-group\"><label class=\"control-label\">Author : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"title\" value=\"" . $article[3] . "\" name=\"author\"></div></div>";
+			$page .= "<div class=\"control-group\"><label class=\"control-label\">Pubdate : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"title\" value=\"" . $article[2] . "\" name=\"pubdate\"></div></div>";
 			$page .= "<div class=\"control-group\"><label class=\"control-label\">Content : </label><div class=\"controls\"><textarea name=\"content\" class=\"span6\" rows=\"15\">" . html_entity_decode($article[1]) . "</textarea></div></div>";
 			$page .= "<div class=\"control-group\"><div class=\"controls\"><button type=\"submit\" class=\"btn btn-success\">Save changes</button></div></div>";
 			$page .= "</fieldset></form>";
 		}
-		elseif ($action == "edit_article_processing") {
-			$article = getArticle($_POST['id'],"../".$datafile_url);
-			$xml = openFile("../".$datafile_url);
-			str_replace($article[1], htmlentities($_POST["content"]), $xml);
-			str_replace($article[0], htmlentities($_POST["title"]), $xml);
-			$page = $xml;
+		elseif ($action == "edit_article_processing" AND isset($_POST['title']) AND isset($_POST['id']) AND isset($_POST['author']) AND isset($_POST['pubdate']) AND isset($_POST['content'])) {
+			$xml = new simpleXMLElement(file_get_contents("../" . $datafile_url));
+
+			foreach ($xml->article as $output) {
+				if ($output->key == $_POST['id']) {
+					$output->title = htmlentities($_POST['title']);
+					$output->author = $_POST['author'];
+					$output->pubdate = $_POST['pubdate'];
+					$output->content = htmlentities($_POST['content']);
+				}
+			}
+			
+			$buffer = $xml->asXML();
+			unlink("../" . $datafile_url);
+			$file = fopen("../" . $datafile_url,"w");
+			fputs($file,$buffer);
+			fclose($file);
+			$page = "<p>Your changes has been done !</p><p><a href=\"index.php\" class=\"btn btn-warning\">Return to index</a></p>";
 		}
 		include("design.html");
 	}

@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <data>
 	<title>Nom du site</title>
 	<url>http://monsite.com</url>
@@ -7,9 +8,9 @@
 	</page>
 	<article>
 		<key>1</key>
-		<title>Nom de l'article numéro 1</title>
-		<content>&lt;p&gt;Bonjour&lt;/p&gt;</content>
-		<pubdate>XX-XX-XXXX</pubdate>
+		<title>Article num&amp;Atilde;&amp;copy;ro 1</title>
+		<content>&amp;lt;p&amp;gt;Bonjour les p&amp;Atilde;&amp;copy;dophiles su&amp;Atilde;&amp;copy;dois&amp;lt;/p&amp;gt;</content>
+		<pubdate>2 F&#xE9;vrier 2001</pubdate>
 		<author>TiBounise</author>
 	</article>
 </data>
