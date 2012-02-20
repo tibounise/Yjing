@@ -10,8 +10,16 @@
 			$config_get = getSiteInfos("../".$datafile_url);
 			$page = "<h1>Edit config</h1><br /><form class=\"form-horizontal\" action=\"config.php?action=edit_config_processing\" method=\"POST\"><fieldset>";
 			$page .= "<div class=\"control-group\"><label class=\"control-label\">Name of the site : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"name\" value=\"" . html_entity_decode($config_get[0]) . "\" name=\"name\"></div></div>";
-			$page .= "<div class=\"control-group\"><label class=\"control-label\">Content of the sidebar : </label><div class=\"controls\"><textarea class=\"span6\" id=\"name\" name=\"name\">" . html_entity_decode($config_get[1]) . "</textarea></div></div>";
+			$page .= "<div class=\"control-group\"><label class=\"control-label\">Content of the sidebar : </label><div class=\"controls\"><textarea rows=\"4\" class=\"span6\" id=\"name\" name=\"name\">" . html_entity_decode($config_get[1]) . "</textarea></div></div>";
+			
+			$page .= "<div class=\"control-group\"><label class=\"control-label\">Theme options : </label><div class=\"controls\"><select name=\"theme\">";
+
+			$page .= scanDirectory("../themes");
+
+			$page .= "</select></div></div>";
+
 			$page .= "<div class=\"control-group\"><div class=\"controls\"><button type=\"submit\" class=\"btn btn-info\">Save changes</button></div></div>";
+			
 			$page .= "</fieldset></form>";
 		}
 		elseif ($_GET['action'] == "edit_config_processing" AND isset($_POST['name'])) {

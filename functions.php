@@ -49,4 +49,16 @@ function openFile($url) {
 	return $output;
 }
 
+function scanDirectory($Directory){
+	$result = "";
+	$MyDirectory = opendir($Directory) or die('Erreur');
+	while($Entry = @readdir($MyDirectory)) {
+		if(is_dir($Directory.'/'.$Entry)&& $Entry != '.' && $Entry != '..') {
+			$result .= "<option value=\"" . $Entry . "\">" . $Entry . "</select>";
+		}
+	}
+	closedir($MyDirectory);
+	return $result;
+}
+
 ?>
