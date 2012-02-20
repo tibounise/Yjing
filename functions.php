@@ -4,10 +4,17 @@ function getArticle($key,$database) {
 
 	$xml = new simpleXMLElement(file_get_contents($database));
 
+	$state = true;
+
 	foreach ($xml->article as $output) {
 		if ($output->key == $key) {
+			$state = false;
 			return array(0 => $output->title, 1 => $output->content, 2 => $output->pubdate, 3 => $output->author);
 		}
+	}
+
+	if ($state == true) {
+		return true;
 	}
 }
 
@@ -15,12 +22,17 @@ function getPage($key,$database) {
 
 	$xml = new simpleXMLElement(file_get_contents($database));
 
-	// $xml->author[0];
+	$state = false;
 
 	foreach ($xml->page as $output) {
 		if ($output->key == $key) {
+			$state = true;
 			return array(0 => $output->content);
 		}
+	}
+
+	if (!$state) {
+		return false;
 	}
 }
 
@@ -49,21 +61,56 @@ function openFile($url) {
 	return $output;
 }
 
-function scanDirectory($Directory,$actual_theme){
+function scanDirectory($directory,$actual_theme){
 	$result = "";
-	$MyDirectory = opendir($Directory) or die('Erreur');
-	while($Entry = readdir($MyDirectory)) {
-		if ($Entry != "." AND $Entry != ".." AND $Entry != ".DS_Store") {
-			if ($Entry == $actual_theme) {
-				$result .= "<option selected=\"selected\" value=\"" . $Entry . "\">" . $Entry . "</option>";
+	$buffer_directory = opendir($directory) or die('Erreur');
+	while($file = readdir($buffer_directory)) {
+		if ($file != "." AND $file != ".." AND $file != ".DS_Store") {
+			if ($file == $actual_theme) {
+				$result .= "<option selected=\"selected\" value=\"" . $file . "\">" . $file . "</option>";
 			}
 			else {
-				$result .= "<option value=\"" . $Entry . "\">" . $Entry . "</option>";
+				$result .= "<option value=\"" . $file . "\">" . $file . "</option>";
 			}
 		}
 	}
-	closedir($MyDirectory);
+	closedir($buffer_directory);
 	return $result;
 }
+
+function sizeOfFile($path) {
+	$buffer = filesize($path);
+	if($buffer >= pow(1024, 3) )
+    {
+        $buffer = round( $buffer / pow(1024, 3), 2);
+        return $buffer . ' Go';
+    }
+    elseif($buffer >=  pow(1024, 2) )
+    {
+        $buffer = round( $buffer / pow(1024, 2), 2);
+        return $buffer . ' Mo';
+    }
+    else
+    {
+        $buffer = round($buffer / 1024, 2);
+        return $buffer . ' Ko';
+    }
+}
+
+function isEmpty($src) { 
+	$handler = opendir($src);
+	$c = 0;
+	while (($file = readdir($handler)) !== FALSE) { 
+		if ($file != '.' AND $file != '..' AND $file != ".DS_Store") { 
+			$c++; 
+		} 
+	} 
+	closedir($handler); 
+	if($c==0) 
+		return true; 
+	else 
+		return false; 
+} 
+
 
 ?>

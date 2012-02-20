@@ -190,10 +190,15 @@
 			$page .= "</tbody></table>";
 		}
 		elseif ($action == "delete_page_confirmation" AND !empty($_GET['page'])) {
-
-			$page = "<h1>Are you sure that you want to delete it ?</h1><br />";
-			$page .= "<a class=\"btn btn-danger\" href=\"edit.php?action=delete_page_processing&page=" . $_GET['page'] . "\">Continue</a>&nbsp;";
-			$page .= "<a class=\"btn btn-success\" href=\"index.php\">Cancel</a>";
+			if ($_GET['page'] == 1) {
+				$page = "<p>You can't delete the first page : it's your homepage !</p>";
+				$page .= "<p><a href=\"index.php\" class=\"btn btn-warning\">Return to index</a></p>";
+			}
+			else {
+				$page = "<h1>Are you sure that you want to delete it ?</h1><br />";
+				$page .= "<a class=\"btn btn-danger\" href=\"edit.php?action=delete_page_processing&page=" . $_GET['page'] . "\">Continue</a>&nbsp;";
+				$page .= "<a class=\"btn btn-success\" href=\"index.php\">Cancel</a>";
+			}
 		}
 		elseif ($action == "delete_page_processing" AND !empty($_GET['page'])) {
 			$xml = new simpleXMLElement(file_get_contents("../" . $datafile_url));
@@ -247,6 +252,9 @@
 			else {
 				$page = "<p>You havn't filled some fields.</p><p><a href=\"index.php\" class=\"btn btn-warning\">Return to index</a></p>";
 			}
+		}
+		else {
+			header("Location: index.php");
 		}
 
 		include("design.html");

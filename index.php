@@ -11,7 +11,10 @@ if (isset($_GET['article']) AND preg_match("#^[0-9]+$#", $_GET["article"])) {
 
 	$article = getArticle($_GET["article"], $datafile_url);
 
-	echo showArticle($site_infos[0],$site_infos[1],$article[0],$article[2],$article[3],$article[1]);
+	if ($article != true) {
+		echo showArticle($site_infos[0],$site_infos[1],$article[0],$article[2],$article[3],$article[1]);
+	}
+	
 
 }
 
