@@ -53,6 +53,49 @@
 			fclose($file);
 			$page = "<p>Your changes has been done !</p><p><a href=\"index.php\" class=\"btn btn-warning\">Return to index</a></p>";
 		}
+		elseif ($action == "delete_article") {
+			$xml = new simpleXMLElement(file_get_contents("../" . $datafile_url));
+
+			$page = "<h1>Choose an article to delete it.</h1><table class=\"table\"><thead><tr><th>#</th><th>Title</th><th>Pubdate</th><th>Author</th></tr></thead><tbody>";
+
+			foreach ($xml->article as $output) {
+				$page .= "<tr>";
+				$page .= "<td>" . $output->key . "</td>";
+				$page .= "<td><a href=\"edit.php?action=delete_article_confirmation&article=". $output->key ."\">" . html_entity_decode($output->title) . "</a></td>";
+				$page .= "<td>" . $output->pubdate . "</td>";
+				$page .= "<td>" . $output->author . "</td>";
+				$page .= "</tr>";
+			}
+
+			$page .= "</tbody></table>";
+		}
+		elseif ($action == "delete_article_confirmation" AND !empty($_GET['article'])) {
+
+			$page = "<h1>Are you sure that you want to delete it ?</h1><br />";
+			$page .= "<a class=\"btn btn-danger\" href=\"edit.php?action=delete_article_processing&article=" . $_GET['article'] . "\">Continue</a>&nbsp;";
+			$page .= "<a class=\"btn btn-success\" href=\"index.php\">Cancel</a>";
+		}
+		elseif ($action == "delete_article_processing" AND !empty($_GET['article'])) {
+			$xml = new simpleXMLElement(file_get_contents("../" . $datafile_url));
+
+			$i = 0;
+
+			foreach ($xml->article as $output) {
+				if ($output->key == $_GET['article']) {
+					unset($xml->article[$i]); break;
+				}
+				$i++;
+			}
+
+			$buffer = $xml->asXML();
+			unlink("../" . $datafile_url);
+			$file = fopen("../" . $datafile_url,"w");
+			fputs($file,$buffer);
+			fclose($file);
+
+			$page = "<p>Article deleted.</p><p><a href=\"index.php\" class=\"btn btn-warning\">Return to index</a></p>";
+		}
+
 		include("design.html");
 	}
 
