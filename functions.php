@@ -28,7 +28,7 @@ function getSiteInfos($database) {
 
 	$xml = new simpleXMLElement(file_get_contents($database));
 
-	return array(0 => $xml->config->title[0], 1 => $xml->config->url[0]);
+	return array(0 => $xml->config->title[0], 1 => $xml->config->sidebar[0]);
 }
 
 function openFile($url) {
