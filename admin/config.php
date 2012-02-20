@@ -12,7 +12,7 @@
 			$page .= "<div class=\"control-group\"><label class=\"control-label\">Name of the site : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"name\" value=\"" . html_entity_decode($config_get[0]) . "\" name=\"name\"></div></div>";
 			$page .= "<div class=\"control-group\"><label class=\"control-label\">Content of the sidebar : </label><div class=\"controls\"><textarea rows=\"4\" class=\"span6\" id=\"name\" name=\"sidebar\">" . stripslashes(html_entity_decode($config_get[1])) . "</textarea></div></div>";
 			
-			$page .= "<div class=\"control-group\"><label class=\"control-label\">Theme options : </label><div class=\"controls\"><select name=\"theme\">";
+			$page .= "<div class=\"control-group\"><label class=\"control-label\">Theme options : </label><div class=\"controls\"><select class=\"span6\" name=\"theme\">";
 
 			$page .= scanDirectory("../themes",$config_get[2]);
 

@@ -53,7 +53,7 @@ function scanDirectory($Directory,$actual_theme){
 	$result = "";
 	$MyDirectory = opendir($Directory) or die('Erreur');
 	while($Entry = readdir($MyDirectory)) {
-		if ($Entry != "." AND $Entry != "..") {
+		if ($Entry != "." AND $Entry != ".." AND $Entry != ".DS_Store") {
 			if ($Entry == $actual_theme) {
 				$result .= "<option selected=\"selected\" value=\"" . $Entry . "\">" . $Entry . "</option>";
 			}
