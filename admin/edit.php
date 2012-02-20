@@ -154,7 +154,7 @@
 			$article = getPage($_GET['page'],"../".$datafile_url);
 			$page = "<h1>Edit an page</h1><br /><form class=\"form-horizontal\" action=\"edit.php?action=edit_article_processing\" method=\"POST\"><fieldset>";
 			$page .= "<input type=\"hidden\" name=\"id\" value=\"" . $_GET['page'] . "\">";
-			$page .= "<div class=\"control-group\"><label class=\"control-label\">Content : </label><div class=\"controls\"><textarea name=\"content\" class=\"span6\" rows=\"15\">" . html_entity_decode($page[0]) . "</textarea></div></div>";
+			$page .= "<div class=\"control-group\"><label class=\"control-label\">Content : </label><div class=\"controls\"><textarea name=\"content\" class=\"span6\" rows=\"15\">" . html_entity_decode($page[1]) . "</textarea></div></div>";
 			$page .= "<div class=\"control-group\"><div class=\"controls\"><button type=\"submit\" class=\"btn btn-success\">Save changes</button></div></div>";
 			$page .= "</fieldset></form>";
 		}
@@ -201,8 +201,8 @@
 			$i = 0;
 
 			foreach ($xml->article as $output) {
-				if ($output->key == $_GET['article']) {
-					unset($xml->article[$i]); break;
+				if ($output->key == $_GET['page']) {
+					unset($xml->page[$i]); break;
 				}
 				$i++;
 			}
@@ -213,42 +213,36 @@
 			fputs($file,$buffer);
 			fclose($file);
 
-			$page = "<p>Article deleted.</p><p><a href=\"index.php\" class=\"btn btn-warning\">Return to index</a></p>";
+			$page = "<p>Page deleted.</p><p><a href=\"index.php\" class=\"btn btn-warning\">Return to index</a></p>";
 		}
-		elseif ($action == "add_article") {
-			$page = "<h1>Add an article</h1><br /><form class=\"form-horizontal\" action=\"edit.php?action=add_article_processing\" method=\"POST\"><fieldset>";
-			$page .= "<div class=\"control-group\"><label class=\"control-label\">Name of the article : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"title\" placeholder=\"Title\" name=\"title\"></div></div>";
-			$page .= "<div class=\"control-group\"><label class=\"control-label\">Author : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"title\" placeholder=\"Author\" name=\"author\"></div></div>";
-			$page .= "<div class=\"control-group\"><label class=\"control-label\">Pubdate : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"title\" placeholder=\"Pubdate\" name=\"pubdate\"></div></div>";
+		elseif ($action == "add_page") {
+			$page = "<h1>Add an page</h1><br /><form class=\"form-horizontal\" action=\"edit.php?action=add_page_processing\" method=\"POST\"><fieldset>";
 			$page .= "<div class=\"control-group\"><label class=\"control-label\">Content : </label><div class=\"controls\"><textarea name=\"content\" class=\"span6\" rows=\"15\" placeholder=\"Type something here.\"></textarea></div></div>";
 			$page .= "<div class=\"control-group\"><div class=\"controls\"><button type=\"submit\" class=\"btn btn-success\">Save</button></div></div>";
 			$page .= "</fieldset></form>";
 		}
 
-		elseif ($action == "add_article_processing") {
-			if (!empty($_POST['title']) AND !empty($_POST['author']) AND !empty($_POST['content']) AND !empty($_POST['pubdate'])) {	
+		elseif ($action == "add_page_processing") {
+			if (!empty($_POST['content'])) {	
 				$xml = new simpleXMLElement(file_get_contents("../" . $datafile_url));
 				
 				$id = 1;
 
-				foreach ($xml->article as $output) {
+				foreach ($xml->page as $output) {
 					if ($output->key >= $id) {
 						$id = $output->key + 1;
 					}
 				}
 
-				$article = $xml->addChild("article","");
+				$article = $xml->addChild("page","");
 				$article->addChild("key",$id);
-				$article->addChild("author",$_POST['author']);
-				$article->addChild("title",htmlentities($_POST['title']));
-				$article->addChild("pubdate",$_POST['pubdate']);
 				$article->addChild("content",htmlentities($_POST['content']));
 				$buffer = $xml->asXML();
 				unlink("../" . $datafile_url);
 				$file = fopen("../" . $datafile_url,"w");
 				fputs($file,$buffer);
 				fclose($file);
-				$page = "<p>The article has been published.</p><p><a href=\"index.php\" class=\"btn btn-warning\">Return to index</a></p>";
+				$page = "<p>The page has been published.</p><p><a href=\"index.php\" class=\"btn btn-warning\">Return to index</a></p>";
 			}
 			else {
 				$page = "<p>You havn't filled some fields.</p><p><a href=\"index.php\" class=\"btn btn-warning\">Return to index</a></p>";
