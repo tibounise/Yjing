@@ -216,7 +216,7 @@
 			$page = "<p>Page deleted.</p><p><a href=\"index.php\" class=\"btn btn-warning\">Return to index</a></p>";
 		}
 		elseif ($action == "add_page") {
-			$page = "<h1>Add an page</h1><br /><form class=\"form-horizontal\" action=\"edit.php?action=add_page_processing\" method=\"POST\"><fieldset>";
+			$page = "<h1>Add a page</h1><br /><form class=\"form-horizontal\" action=\"edit.php?action=add_page_processing\" method=\"POST\"><fieldset>";
 			$page .= "<div class=\"control-group\"><label class=\"control-label\">Content : </label><div class=\"controls\"><textarea name=\"content\" class=\"span6\" rows=\"15\" placeholder=\"Type something here.\"></textarea></div></div>";
 			$page .= "<div class=\"control-group\"><div class=\"controls\"><button type=\"submit\" class=\"btn btn-success\">Save</button></div></div>";
 			$page .= "</fieldset></form>";
