@@ -21,7 +21,7 @@
   	}
   	fclose($file);
 
-  	str_replace(array("0 => \"<username>\"","1 => \"<password>\""), array("0 => \"" . $_SESSION['username'] . "\"","1 => \"" . md5($_SESSION['password']) . "\"", $output);
+  	str_replace(array("0 => \"<username>\"","1 => \"<password>\""), array("0 => \"" . $_SESSION['username'] . "\"","1 => \"" . md5($_SESSION['password'])) . "\"", $output);
   	unlink("../params.php");
 	$file = fopen("../params.php","w");
 	fputs($file,$buffer);
@@ -71,3 +71,10 @@
 
 </body>
 </html>
+<?php
+	unlink("index.php");
+	unlink("step2.php");
+	unlink("step3.php");
+	unlink("step4.php");
+	rmdir("../install");
+?>
