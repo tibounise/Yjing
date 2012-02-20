@@ -205,7 +205,7 @@
 
 			$i = 0;
 
-			foreach ($xml->article as $output) {
+			foreach ($xml->page as $output) {
 				if ($output->key == $_GET['page']) {
 					unset($xml->page[$i]); break;
 				}
