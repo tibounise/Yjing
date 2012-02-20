@@ -2,7 +2,7 @@
 <data>
 	<config>
 		<title>Title of the website</title>
-		<sidebar>&amp;lt;li&amp;gt;&amp;lt;a href=\&amp;quot;#&amp;gt;About&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;</sidebar>
+		<sidebar>&amp;lt;li&amp;gt;&amp;lt;a href=\&amp;quot;#\&amp;quot;&amp;gt;About&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;</sidebar>
 		<theme>twitter_bootstrap</theme>
 	</config>
 	<page>
