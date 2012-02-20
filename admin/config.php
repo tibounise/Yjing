@@ -13,7 +13,6 @@
 			$page .= "<div class=\"control-group\"><label class=\"control-label\">Content of the sidebar : </label><div class=\"controls\"><textarea rows=\"4\" class=\"span6\" id=\"name\" name=\"sidebar\">" . stripslashes(html_entity_decode($config_get[1])) . "</textarea></div></div>";
 			$page .= "<div class=\"control-group\"><label class=\"control-label\">Error 404 message : </label><div class=\"controls\"><textarea rows=\"6\" class=\"span6\" id=\"name\" name=\"404\">" . stripslashes(html_entity_decode($config_get[3])) . "</textarea></div></div>";
 			$page .= "<div class=\"control-group\"><label class=\"control-label\">Error 403 message : </label><div class=\"controls\"><textarea rows=\"6\" class=\"span6\" id=\"name\" name=\"403\">" . stripslashes(html_entity_decode($config_get[4])) . "</textarea></div></div>";
-			$page .= "<div class=\"control-group\"><label class=\"control-label\">Website root : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"name\" value=\"" . html_entity_decode($config_get[5]) . "\" name=\"root\"><p class=\"help-block\">The address of the root of your Yjing folder without the slash.</p></div></div>";
 			
 			$page .= "<div class=\"control-group\"><label class=\"control-label\">Theme options : </label><div class=\"controls\"><select class=\"span6\" name=\"theme\">";
 
@@ -34,7 +33,6 @@
 				$output->error403 = htmlentities($_POST['403']);
 				$output->sidebar = htmlentities($_POST['sidebar']);
 				$output->theme = $_POST['theme'];
-				$output->root = htmlentities($_POST['root']);
 			}
 			
 			$buffer = $xml->asXML();

@@ -148,7 +148,7 @@
 			foreach ($xml->page as $output) {
 				$page .= "<tr>";
 				$page .= "<td>" . $output->key . "</td>";
-				$page .= "<td><a href=\"edit.php?action=edit_page&page=". $output->key ."\">" . substr(html_entity_decode($output->content), 0, 140) . "</a></td>";
+				$page .= "<td><a href=\"edit.php?action=edit_page&page=". $output->key ."\">" . strip_tags(substr(html_entity_decode($output->content), 0, 140)) . "</a></td>";
 				$page .= "</tr>";
 			}
 
