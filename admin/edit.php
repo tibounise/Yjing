@@ -181,7 +181,7 @@
 
 			foreach ($xml->page as $output) {
 				$page .= "<tr>";
-				$page .= "<td><a style=\"margin-top: -3px;\" class=\"close\" href=\"edit.php?action=delete_page_confirmation&article=". $output->key ."\">&times;</a></td>";
+				$page .= "<td><a style=\"margin-top: -3px;\" class=\"close\" href=\"edit.php?action=delete_page_confirmation&page=". $output->key ."\">&times;</a></td>";
 				$page .= "<td>" . $output->key . "</td>";
 				$page .= "<td><a href=\"edit.php?action=delete_page_confirmation&page=". $output->key ."\">" . html_entity_decode($output->content) . "</a></td>";
 				$page .= "</tr>";
@@ -192,7 +192,7 @@
 		elseif ($action == "delete_page_confirmation" AND !empty($_GET['page'])) {
 
 			$page = "<h1>Are you sure that you want to delete it ?</h1><br />";
-			$page .= "<a class=\"btn btn-danger\" href=\"edit.php?action=delete_page_processing&article=" . $_GET['page'] . "\">Continue</a>&nbsp;";
+			$page .= "<a class=\"btn btn-danger\" href=\"edit.php?action=delete_page_processing&page=" . $_GET['page'] . "\">Continue</a>&nbsp;";
 			$page .= "<a class=\"btn btn-success\" href=\"index.php\">Cancel</a>";
 		}
 		elseif ($action == "delete_page_processing" AND !empty($_GET['page'])) {
