@@ -2,6 +2,7 @@
 	session_start();
 
 	include("../params.php");
+	include("../functions.php");
 
 	if (!empty($_SESSION['connected']) AND isset($_GET['action']) AND $_GET['action'] == "logout") {
 		session_destroy();
@@ -72,7 +73,8 @@
 		</head>
 		<body>
 			<?php
-				if (!isset($_SESSION['try']) OR $_SESSION['try'] <= $numberoftry) {
+				$config_get = getSiteInfos("../".$datafile_url);
+				if (!isset($_SESSION['try']) OR $_SESSION['try'] <= html_entity_decode($config_get[5])) {
 			?>
 			<div id="caption">
 			<p>
