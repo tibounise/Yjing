@@ -1,9 +1,13 @@
 <?php
 	session_start();
-
+	
+	if (!isset($_SESSION['try'])) {
+		$_SESSION['try'] = 0;
+	}
+	
 	include("../params.php");
 	include("../functions.php");
-
+	
 	if (!empty($_SESSION['connected']) AND isset($_GET['action']) AND $_GET['action'] == "logout") {
 		session_destroy();
 		header("Location: index.php");
