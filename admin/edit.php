@@ -30,7 +30,7 @@
 			$page .= "<div class=\"control-group\"><label class=\"control-label\">Name of the article : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"title\" value=\"" . html_entity_decode($article_get[0]) . "\" name=\"title\"></div></div>";
 			$page .= "<div class=\"control-group\"><label class=\"control-label\">Author : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"title\" value=\"" . $article_get[3] . "\" name=\"author\"></div></div>";
 			$page .= "<div class=\"control-group\"><label class=\"control-label\">Pubdate : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"title\" value=\"" . $article_get[2] . "\" name=\"pubdate\"></div></div>";
-			$page .= "<div class=\"control-group\"><label class=\"control-label\">Content : </label><div class=\"controls\"><textarea name=\"content\" class=\"span6\" rows=\"15\">" . html_entity_decode($article_get[1]) . "</textarea></div></div>";
+			$page .= "<div class=\"control-group\"><label class=\"control-label\">Content : </label><div class=\"controls\"><textarea name=\"content\" class=\"span6\" rows=\"15\">" . stripslashes(html_entity_decode($article_get[1])) . "</textarea></div></div>";
 			$page .= "<div class=\"control-group\"><div class=\"controls\"><button type=\"submit\" class=\"btn btn-success\">Save changes</button></div></div>";
 			$page .= "</fieldset></form>";
 		}
@@ -148,7 +148,7 @@
 			foreach ($xml->page as $output) {
 				$page .= "<tr>";
 				$page .= "<td>" . $output->key . "</td>";
-				$page .= "<td><a href=\"edit.php?action=edit_page&page=". $output->key ."\">" . strip_tags(substr(html_entity_decode($output->content), 0, 140)) . "</a></td>";
+				$page .= "<td><a href=\"edit.php?action=edit_page&page=". $output->key ."\">" . stripslashes(strip_tags(substr(html_entity_decode($output->content), 0, 140))) . "</a></td>";
 				$page .= "</tr>";
 			}
 
