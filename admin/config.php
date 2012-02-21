@@ -20,7 +20,7 @@
 
 			$page .= "</select></div></div>";
 			
-			$page .= "<div class=\"control-group\"><label class=\"control-label\">Numbers of login tentatives : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"tent\" value=\"" . html_entity_decode($config_get[5]) . "\" name=\"tent\"></div></div>";
+			$page .= "<div class=\"control-group\"><label class=\"control-label\">Number of attemps : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"tent\" value=\"" . html_entity_decode($config_get[5]) . "\" name=\"tent\"></div></div>";
 
 			$page .= "<div class=\"control-group\"><div class=\"controls\"><button type=\"submit\" class=\"btn btn-info\">Save changes</button></div></div>";
 			

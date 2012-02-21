@@ -106,7 +106,7 @@
 				else {
 			?>
 			<div id="caption" class="error"><p>ERROR</p></div>
-			<div id="form"><p class="alert">You've tried too much logins.</p></form>
+			<div id="form"><p class="alert">You've tried too much attemps.</p></form>
 			<?php
 				}
 			?>
