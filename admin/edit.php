@@ -148,7 +148,7 @@
 			foreach ($xml->page as $output) {
 				$page .= "<tr>";
 				$page .= "<td>" . $output->key . "</td>";
-				$page .= "<td><a href=\"edit.php?action=edit_page&page=". $output->key ."\">" . stripslashes(strip_tags(substr(html_entity_decode($output->content), 0, 140))) . "</a></td>";
+				$page .= "<td><a href=\"edit.php?action=edit_page&page=". $output->key ."\">" . stripslashes(strip_tags(substr(html_entity_decode($output->content), 0, 140))) . "[...]</a></td>";
 				$page .= "</tr>";
 			}
 
@@ -189,7 +189,7 @@
 				$page .= "<tr>";
 				$page .= "<td><a style=\"margin-top: -3px;\" class=\"close\" href=\"edit.php?action=delete_page_confirmation&page=". $output->key ."\">&times;</a></td>";
 				$page .= "<td>" . $output->key . "</td>";
-				$page .= "<td><a href=\"edit.php?action=delete_page_confirmation&page=". $output->key ."\">" . html_entity_decode($output->content) . "</a></td>";
+				$page .= "<td><a href=\"edit.php?action=delete_page_confirmation&page=". $output->key ."\">" . stripslashes(strip_tags(substr(html_entity_decode($output->content), 0, 140))) . "[...]</a></td>";
 				$page .= "</tr>";
 			}
 
