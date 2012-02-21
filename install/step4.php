@@ -5,6 +5,7 @@
 	$xml = new simpleXMLElement(file_get_contents("../data.xml"));
 
 	$xml->config->title = htmlentities($_POST['title']);
+	$xml->config->install = "1";
 
 	$buffer = $xml->asXML();
 	unlink("../data.xml");
