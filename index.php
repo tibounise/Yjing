@@ -27,7 +27,7 @@ if (isset($_GET['article']) AND preg_match("#^[0-9]+$#", $_GET["article"])) {
 
 elseif (isset($_GET["page"]) AND preg_match("#^[0-9]+$#", $_GET["page"])) {
 
-	$page = getArticle($_GET["page"], $datafile_url);
+	$page = getPage($_GET["page"], $datafile_url);
 
 	if ($page == "nil") {
 		echo showPage($site_infos[0],$site_infos[1],stripslashes($site_infos[3]));
