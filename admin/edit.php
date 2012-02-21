@@ -123,9 +123,9 @@
 				$article = $xml->addChild("article","");
 				$article->addChild("key",$id);
 				$article->addChild("author",$_POST['author']);
-				$article->addChild("title",htmlentities($_POST['title']));
+				$article->addChild("title",$_POST['title']);
 				$article->addChild("pubdate",$_POST['pubdate']);
-				$article->addChild("content",htmlentities($_POST['content']));
+				$article->addChild("content",$_POST['content']);
 				$buffer = $xml->asXML();
 				unlink("../" . $datafile_url);
 				$file = fopen("../" . $datafile_url,"w");
@@ -247,14 +247,14 @@
 
 				$article = $xml->addChild("page","");
 				$article->addChild("key",$id);
-				$article->addChild("content",htmlentities($_POST['content']));
+				$article->addChild("content",$_POST['content']);
 				$buffer = $xml->asXML();
 				unlink("../" . $datafile_url);
 				$file = fopen("../" . $datafile_url,"w");
 				fputs($file,$buffer);
 				fclose($file);
 				$page = "<p>The page has been published.</p>";
-				$page .= "<p>Your article is available at : <strong><i>index.php?page=" . $id . "</i></strong>.</p>";
+				$page .= "<p>Your page is available at : <strong><i>index.php?page=" . $id . "</i></strong>.</p>";
 				$page .= "<p><a href=\"index.php\" class=\"btn btn-warning\">Return to index</a></p>";
 			}
 			else {
