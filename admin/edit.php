@@ -158,7 +158,7 @@
 			$page_get = getPage($_GET['page'],"../".$datafile_url);
 			$page = "<h1>Edit an page</h1><br /><form class=\"form-horizontal\" action=\"edit.php?action=edit_page_processing\" method=\"POST\"><fieldset>";
 			$page .= "<input type=\"hidden\" name=\"id\" value=\"" . $_GET['page'] . "\">";
-			$page .= "<div class=\"control-group\"><label class=\"control-label\">Content : </label><div class=\"controls\"><textarea name=\"content\" class=\"span6\" rows=\"15\">" . html_entity_decode($page_get[0]) . "</textarea></div></div>";
+			$page .= "<div class=\"control-group\"><label class=\"control-label\">Content : </label><div class=\"controls\"><textarea name=\"content\" class=\"span6\" rows=\"15\">" . stripslashes(html_entity_decode($page_get[0])) . "</textarea></div></div>";
 			$page .= "<div class=\"control-group\"><div class=\"controls\"><button type=\"submit\" class=\"btn btn-success\">Save changes</button></div></div>";
 			$page .= "</fieldset></form>";
 		}
