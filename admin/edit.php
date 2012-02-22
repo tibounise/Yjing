@@ -177,7 +177,7 @@
 			fputs($file,$buffer);
 			fclose($file);
 			$page = "<p>Your changes has been done !</p>";
-			$page .= "<p>Your article is available at : <strong><i>index.php?page=" . $_POST['id'] . "</i></strong>.</p>";
+			$page .= "<p>Your page is available at : <strong><i>index.php?page=" . $_POST['id'] . "</i></strong>.</p>";
 			$page .= "<p><a href=\"index.php\" class=\"btn btn-warning\">Return to index</a></p>";
 		}
 		elseif ($action == "delete_page") {

@@ -8,8 +8,8 @@
 	if (isset($_SESSION['connected']) AND !empty($_GET['action']) AND $_SESSION['connected'] == true) {
 		$action = $_GET['action'];
 		if ($action == "add_media") {
-			$page = "<h1>Upload an image</h1><br /><form class=\"form-horizontal\" action=\"media.php?action=add_media_processing\" method=\"POST\" enctype=\"multipart/form-data\"><fieldset>";
-			$page .= "<div class=\"control-group\"><label class=\"control-label\">Image : </label><div class=\"controls\"><input type=\"file\" class=\"span6\" id=\"media\" name=\"media\"><p class=\"help-block\">For your security, Yjing accepts only by default Jpeg, Gif, Png, Mp3, Mp4, Avi, WebM and Ogg files.</p></div></div>";
+			$page = "<h1>Upload an media</h1><br /><form class=\"form-horizontal\" action=\"media.php?action=add_media_processing\" method=\"POST\" enctype=\"multipart/form-data\"><fieldset>";
+			$page .= "<div class=\"control-group\"><label class=\"control-label\">Media : </label><div class=\"controls\"><input type=\"file\" class=\"span6\" id=\"media\" name=\"media\"><p class=\"help-block\">For your security, Yjing accepts only by default Jpeg, Gif, Png, Mp3, Mp4, Avi, WebM and Ogg files.</p></div></div>";
 			$page .= "<div class=\"control-group\"><div class=\"controls\"><button type=\"submit\" class=\"btn btn-success\">Upload</button></div></div>";
 			$page .= "</fieldset></form>";
 		}
