@@ -1,9 +1,17 @@
 <?php 
 	session_start();
-
+	
+	if (!isset($_SESSION['lang'])) {
+		$lang = 0;
+	} 
+	else {
+		$lang = $_SESSION['lang'];
+	}
+	
 	$_SESSION['username'] = $_POST['username'];
 	$_SESSION['password'] = $_POST['password'];
-
+	
+	include("../langs.php");
 ?>
 <!doctype html>
 <html>
@@ -45,10 +53,10 @@
 				<a class="brand" href="#">Yjing - Installation</a>
 				<div class="nav-collapse">
             		<ul class="nav">
-              			<li><a href="#">Step 1</a></li>
-              			<li><a href="#">Step 2</a></li>
-              			<li class="active"><a href="#">Step 3</a></li>
-              			<li><a href="#">Step 4</a></li>
+              			<li><a href="#"><?php echo $step_lang[$lang] ; ?> 1</a></li>
+              			<li><a href="#"><?php echo $step_lang[$lang] ; ?> 2</a></li>
+              			<li class="active"><a href="#"><?php echo $step_lang[$lang] ; ?> 3</a></li>
+              			<li><a href="#"><?php echo $step_lang[$lang] ; ?> 4</a></li>
             		</ul>
           		</div>
 			</div>
@@ -57,16 +65,16 @@
 
 	<div class="container">
 		<div id="alertbox"></div>
-		<p><h1>Let's customize your site !</h1></p>
-		<p>We want Yjing to be your website. So it needs to fit you !</p>
+		<p><h1><?php echo $customize[$lang] ; ?> !</h1></p>
+		<p><?php echo $first_parag_3[$lang] ; ?> !</p>
 		<br>
 		<form class="form-horizontal" action="step4.php" method="POST" onSubmit="return checkFilled();">
   			<fieldset>
     				<div class="control-group">
-    					<label class="control-label">Title of the website : </label>
+    					<label class="control-label"><?php echo $name_of_the_site[$lang] ; ?> : </label>
     						<div class="controls">
     							<input type="text" class="input-xlarge" name="title" onKeypress="return valid_text(event);" id="title">
-        						<p class="help-block">Only alphanumeric characters.</p>
+        						<p class="help-block"><?php echo $alphanumeric[$lang] ; ?>.</p>
       						</div>
     				</div>
     				<div class="control-group">

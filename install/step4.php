@@ -1,6 +1,13 @@
 <?php 
 
 	session_start();
+	
+	if (!isset($_SESSION['lang'])) {
+		$lang = 0;
+	} 
+	else {
+		$lang = $_SESSION['lang'];
+	}
 
 	$xml = new simpleXMLElement(file_get_contents("../data.xml"));
 
@@ -30,7 +37,8 @@
 	$file = fopen("../params.php","w");
 	fputs($file,$buffer_configs);
 	fclose($file);
-
+	
+	include("../langs.php");
 ?>
 <!doctype html>
 <html>
@@ -52,10 +60,10 @@
 				<a class="brand" href="#">Yjing - Installation</a>
 				<div class="nav-collapse">
             		<ul class="nav">
-              			<li><a href="#">Step 1</a></li>
-              			<li><a href="#">Step 2</a></li>
-              			<li><a href="#">Step 3</a></li>
-              			<li class="active"><a href="#">Step 4</a></li>
+              			<li><a href="#"><?php echo $step_lang[$lang] ; ?> 1</a></li>
+              			<li><a href="#"><?php echo $step_lang[$lang] ; ?> 2</a></li>
+              			<li><a href="#"><?php echo $step_lang[$lang] ; ?> 3</a></li>
+              			<li class="active"><a href="#"><?php echo $step_lang[$lang] ; ?> 4</a></li>
             		</ul>
           		</div>
 			</div>
@@ -64,9 +72,9 @@
 
 	<div class="container">
 		<div id="alertbox"></div>
-		<p><h1>Your website is ready to be used !</h1></p>
-		<p>Yeah, that was fast and easy ...</p>
-		<p><a href="../" class="btn btn-info">Go to your website !</a>&nbsp;<a href="../admin" class="btn btn-warning">Go to the administration panel !</a></p>
+		<p><h1><?php echo $ready[$lang] ; ?> !</h1></p>
+		<p><?php echo $fast_and_easy[$lang] ; ?> ...</p>
+		<p><a href="../" class="btn btn-info"><?php echo $go_website[$lang] ; ?> !</a>&nbsp;<a href="../admin" class="btn btn-warning"><?php echo $go_admin[$lang] ; ?> !</a></p>
 
 		<br>
 		<hr>

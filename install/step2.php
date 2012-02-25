@@ -1,3 +1,15 @@
+<?php
+	session_start();
+
+	if (!isset($_SESSION['lang'])) {
+		$lang = 0;
+	} 
+	else {
+		$lang = $_SESSION['lang'];
+	}
+	
+	include("../langs.php");
+?>
 <!doctype html>
 <html>
 <head>
@@ -23,7 +35,7 @@
 				return true;
 			}
 			else {
-				document.getElementById("alertbox").innerHTML = "<div class=\"alert alert-error\">You havn't filled enough fields !</div>"
+				document.getElementById("alertbox").innerHTML = "<div class=\"alert alert-error\"><?php echo $notenough[$lang] ; ?></div>"
 				return false;
 			}
 		}
@@ -38,10 +50,10 @@
 				<a class="brand" href="#">Yjing - Installation</a>
 				<div class="nav-collapse">
             		<ul class="nav">
-              			<li><a href="#">Step 1</a></li>
-              			<li class="active"><a href="#">Step 2</a></li>
-              			<li><a href="#">Step 3</a></li>
-              			<li><a href="#">Step 4</a></li>
+              			<li><a href="#"><?php echo $step_lang[$lang] ; ?> 1</a></li>
+              			<li class="active"><a href="#"><?php echo $step_lang[$lang] ; ?> 2</a></li>
+              			<li><a href="#"><?php echo $step_lang[$lang] ; ?> 3</a></li>
+              			<li><a href="#"><?php echo $step_lang[$lang] ; ?> 4</a></li>
             		</ul>
           		</div>
 			</div>
@@ -50,28 +62,28 @@
 
 	<div class="container">
 		<div id="alertbox"></div>
-		<p><h1>Give us a login !</h1></p>
-		<p>When you will want to create articles or pages, you'll need to log on the back-office. But to protect the back-office, you'll need to set a login.</p>
+		<p><h1><?php echo $give_login[$lang] ; ?> !</h1></p>
+		<p><?php echo $first_parag_2[$lang] ; ?></p>
 		<br>
 		<form class="form-horizontal" action="step3.php" method="POST" onSubmit="return checkFilled();">
   			<fieldset>
     				<div class="control-group">
-    					<label class="control-label">Username : </label>
+    					<label class="control-label"><?php echo $username[$lang] ; ?> : </label>
     						<div class="controls">
     							<input type="text" class="input-xlarge" name="username" onKeypress="return valid_text(event);" id="username">
-        						<p class="help-block">Only alphanumeric characters.</p>
+        						<p class="help-block"><?php echo $alphanumeric[$lang] ; ?>.</p>
       						</div>
     				</div>
     				<div class="control-group">
-    					<label class="control-label">Password : </label>
+    					<label class="control-label"><?php echo $password[$lang] ; ?> : </label>
     						<div class="controls">
     							<input type="password" class="input-xlarge" name="password" onKeypress="return valid_text(event);" id="password">
-        						<p class="help-block">Only alphanumeric characters too.</p>
+        						<p class="help-block"><?php echo $alphanumeric[$lang], $too[$lang] ; ?>.</p>
       						</div>
     				</div>
     				<div class="control-group">
     					<div class="controls">
-    						<input type="submit" class="btn btn-info" value="Continue" />
+    						<input type="submit" class="btn btn-info" value="<?php echo $continue[$lang] ; ?>" />
     					</div>
     				</div>
   			</fieldset>
