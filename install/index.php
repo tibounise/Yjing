@@ -71,9 +71,8 @@
 		<select name="language">
 		<option value="1"><?php echo $french_lang[$lang] ; ?></option>
 		<option value="0" selected="selected"><?php echo $english_lang[$lang] ; ?></option>
-		</select>
+		</select></div></div>
 	<div class="control-group"><div class="controls"><button type="submit" class="btn btn-info"><?php echo $save_changes[$lang] ; ?></button></div></div>
-		</div></div>
 		</form>
 		<br />
 		<hr />
