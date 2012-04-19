@@ -1,13 +1,10 @@
 <?php
-$url_lang = substr($_SERVER['PHP_SELF'], 0, 7);
-if($url_lang == "/admin/") {
+if(file_exists("edit.php")) {
 	$lang_file = getSiteInfos("../" . $datafile_url);
+	$lang = html_entity_decode($lang_file[8]);
 }
-elseif ($url_lang != "/instal") {
+elseif (file_exists("step1.php")) {
 	$lang_file = getSiteInfos("./" . $datafile_url);
-}
-
-if($url_lang != "/instal") {
 	$lang = html_entity_decode($lang_file[8]);
 }
 

@@ -7,7 +7,7 @@ include ("langs.php");
 $site_infos = getSiteInfos($datafile_url);
 
 if ($site_infos[6] == "0") {
-	header('Location: /install/');
+	header('Location: install/');
 }
 
 include "themes/" . $site_infos[2] . "/theme.php";
