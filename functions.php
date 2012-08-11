@@ -8,7 +8,7 @@ function getArticle($key,$database) {
 
 	foreach ($xml->article as $output) {
 		if ($output->key == $key) {
-			$state = array(0 => $output->title, 1 => $output->content, 2 => $output->pubdate, 3 => $output->author);
+			$state = array(0 => base64_decode($output->title), 1 => base64_decode($output->content), 2 => base64_decode($output->pubdate), 3 => base64_decode($output->author));
 		}
 	}
 	
@@ -23,7 +23,7 @@ function getPage($key,$database) {
 
 	foreach ($xml->page as $output) {
 		if ($output->key == $key) {
-			$state = array(0 => $output->content);
+			$state = array(0 => base64_decode($output->content));
 		}
 	}
 

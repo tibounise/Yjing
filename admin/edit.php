@@ -11,14 +11,14 @@
 		if ($action == "list_article") {
 			$xml = new simpleXMLElement(file_get_contents("../" . $datafile_url));
 
-			$page = "<h1>" . $choose_an_article_to_edit[$lang] . ".</h1><table class=\"table\"><thead><tr><th>#</th><th>" . $title[$lang] . "</th><th>" . $pubdate[$lang] . "</th><th>" . $author[$lang] . "</th></tr></thead><tbody>";
+			$page = "<h1>" . $choose_an_article_to_edit[$lang] . ".</h1><table class=\"table\"><thead><tr><th>#</th><th>" . base64_decode($title[$lang]) . "</th><th>" . base64_decode($pubdate[$lang]) . "</th><th>" . base64_decode($author[$lang]) . "</th></tr></thead><tbody>";
 
 			foreach ($xml->article as $output) {
 				$page .= "<tr>";
 				$page .= "<td>" . $output->key . "</td>";
-				$page .= "<td><a href=\"edit.php?action=edit_article&article=". $output->key ."\">" . html_entity_decode($output->title) . "</a></td>";
-				$page .= "<td>" . $output->pubdate . "</td>";
-				$page .= "<td>" . $output->author . "</td>";
+				$page .= "<td><a href=\"edit.php?action=edit_article&article=". $output->key ."\">" . htmlspecialchars_decode(base64_decode($output->title)) . "</a></td>";
+				$page .= "<td>" . base64_decode($output->pubdate) . "</td>";
+				$page .= "<td>" . base64_decode($output->author) . "</td>";
 				$page .= "</tr>";
 			}
 
@@ -28,10 +28,10 @@
 			$article_get = getArticle($_GET['article'],"../".$datafile_url);
 			$page = "<h1>" . $edit_an_article[$lang] . "</h1><br /><form class=\"form-horizontal\" action=\"edit.php?action=edit_article_processing\" method=\"POST\"><fieldset>";
 			$page .= "<input type=\"hidden\" name=\"id\" value=\"" . $_GET['article'] . "\">";
-			$page .= "<div class=\"control-group\"><label class=\"control-label\">" . $name_of_the_article[$lang] . " : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"title\" value=\"" . html_entity_decode($article_get[0]) . "\" name=\"title\"></div></div>";
+			$page .= "<div class=\"control-group\"><label class=\"control-label\">" . $name_of_the_article[$lang] . " : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"title\" value=\"" . htmlspecialchars_decode(base64_decode($article_get[0])) . "\" name=\"title\"></div></div>";
 			$page .= "<div class=\"control-group\"><label class=\"control-label\">" . $author[$lang] . " : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"title\" value=\"" . $article_get[3] . "\" name=\"author\"></div></div>";
 			$page .= "<div class=\"control-group\"><label class=\"control-label\">" . $pubdate[$lang] . " : </label><div class=\"controls\"><input type=\"text\" class=\"span6\" id=\"title\" value=\"" . $article_get[2] . "\" name=\"pubdate\"></div></div>";
-			$page .= "<div class=\"control-group\"><label class=\"control-label\">" . $content[$lang] . " : </label><div class=\"controls\"><textarea name=\"content\" class=\"span6\" rows=\"15\">" . stripslashes(html_entity_decode($article_get[1])) . "</textarea></div></div>";
+			$page .= "<div class=\"control-group\"><label class=\"control-label\">" . $content[$lang] . " : </label><div class=\"controls\"><textarea name=\"content\" class=\"span6\" rows=\"15\">" . stripslashes(htmlspecialchars_decode($article_get[1])) . "</textarea></div></div>";
 			$page .= "<div class=\"control-group\"><div class=\"controls\"><button type=\"submit\" class=\"btn btn-success\">" . $save_changes[$lang] . "</button></div></div>";
 			$page .= "</fieldset></form>";
 		}
@@ -40,10 +40,10 @@
 
 			foreach ($xml->article as $output) {
 				if ($output->key == $_POST['id']) {
-					$output->title = htmlentities($_POST['title']);
-					$output->author = $_POST['author'];
-					$output->pubdate = $_POST['pubdate'];
-					$output->content = htmlentities($_POST['content']);
+					$output->title = base64_encode($_POST['title']);
+					$output->author = base64_encode($_POST['author']);
+					$output->pubdate = base64_encode($_POST['pubdate']);
+					$output->content = base64_encode($_POST['content']);
 				}
 			}
 			
@@ -65,9 +65,9 @@
 				$page .= "<tr>";
 				$page .= "<td><a style=\"margin-top: -3px;\" class=\"close\" href=\"edit.php?action=delete_article_confirmation&article=". $output->key ."&token=". $_SESSION['token'] ."\">&times;</a></td>";
 				$page .= "<td>" . $output->key . "</td>";
-				$page .= "<td><a href=\"edit.php?action=delete_article_confirmation&article=". $output->key ."&token=". $_SESSION['token'] ."\">" . html_entity_decode($output->title) . "</a></td>";
-				$page .= "<td>" . $output->pubdate . "</td>";
-				$page .= "<td>" . $output->author . "</td>";
+				$page .= "<td><a href=\"edit.php?action=delete_article_confirmation&article=". $output->key ."&token=". $_SESSION['token'] ."\">" . htmlspecialchars(base64_decode($output->title)) . "</a></td>";
+				$page .= "<td>" . base64_decode($output->pubdate) . "</td>";
+				$page .= "<td>" . base64_decode($output->author) . "</td>";
 				$page .= "</tr>";
 			}
 
@@ -123,10 +123,10 @@
 
 				$article = $xml->addChild("article","");
 				$article->addChild("key",$id);
-				$article->addChild("author",$_POST['author']);
-				$article->addChild("title",$_POST['title']);
-				$article->addChild("pubdate",$_POST['pubdate']);
-				$article->addChild("content",$_POST['content']);
+				$article->addChild("author",base64_encode($_POST['author']));
+				$article->addChild("title",base64_encode($_POST['title']));
+				$article->addChild("pubdate",base64_encode($_POST['pubdate']));
+				$article->addChild("content",base64_encode($_POST['content']));
 				$buffer = $xml->asXML();
 				unlink("../" . $datafile_url);
 				$file = fopen("../" . $datafile_url,"w");
@@ -149,7 +149,7 @@
 			foreach ($xml->page as $output) {
 				$page .= "<tr>";
 				$page .= "<td>" . $output->key . "</td>";
-				$page .= "<td><a href=\"edit.php?action=edit_page&page=". $output->key ."\">" . stripslashes(strip_tags(substr(html_entity_decode($output->content), 0, 140))) . "[...]</a></td>";
+				$page .= "<td><a href=\"edit.php?action=edit_page&page=". $output->key ."\">" . stripslashes(strip_tags(substr(htmlspecialchars_decode(base64_decode($output->content)), 0, 140))) . "[...]</a></td>";
 				$page .= "</tr>";
 			}
 
@@ -159,7 +159,7 @@
 			$page_get = getPage($_GET['page'],"../".$datafile_url);
 			$page = "<h1>" . $edit_an_page[$lang] . "</h1><br /><form class=\"form-horizontal\" action=\"edit.php?action=edit_page_processing\" method=\"POST\"><fieldset>";
 			$page .= "<input type=\"hidden\" name=\"id\" value=\"" . $_GET['page'] . "\">";
-			$page .= "<div class=\"control-group\"><label class=\"control-label\">" . $content[$lang] . " : </label><div class=\"controls\"><textarea name=\"content\" class=\"span6\" rows=\"15\">" . stripslashes(html_entity_decode($page_get[0])) . "</textarea></div></div>";
+			$page .= "<div class=\"control-group\"><label class=\"control-label\">" . $content[$lang] . " : </label><div class=\"controls\"><textarea name=\"content\" class=\"span6\" rows=\"15\">" . stripslashes(htmlspecialchars_decode(base64_decode($page_get[0]))) . "</textarea></div></div>";
 			$page .= "<div class=\"control-group\"><div class=\"controls\"><button type=\"submit\" class=\"btn btn-success\">" . $save_changes[$lang] . "</button></div></div>";
 			$page .= "</fieldset></form>";
 		}
@@ -168,7 +168,7 @@
 
 			foreach ($xml->page as $output) {
 				if ($output->key == $_POST['id']) {
-					$output->content = htmlentities($_POST['content']);
+					$output->content = base64_encode($_POST['content']);
 				}
 			}
 			
@@ -190,7 +190,7 @@
 				$page .= "<tr>";
 				$page .= "<td><a style=\"margin-top: -3px;\" class=\"close\" href=\"edit.php?action=delete_page_confirmation&page=". $output->key ."&token=". $_SESSION['token'] ."\">&times;</a></td>";
 				$page .= "<td>" . $output->key . "</td>";
-				$page .= "<td><a href=\"edit.php?action=delete_page_confirmation&page=". $output->key ."&token=". $_SESSION['token'] ."\">" . stripslashes(strip_tags(substr(html_entity_decode($output->content), 0, 140))) . "[...]</a></td>";
+				$page .= "<td><a href=\"edit.php?action=delete_page_confirmation&page=". $output->key ."&token=". $_SESSION['token'] ."\">" . stripslashes(strip_tags(substr(htmlspecialchars_decode(base64_decode($output->content)), 0, 140))) . "[...]</a></td>";
 				$page .= "</tr>";
 			}
 
@@ -248,7 +248,7 @@
 
 				$article = $xml->addChild("page","");
 				$article->addChild("key",$id);
-				$article->addChild("content",$_POST['content']);
+				$article->addChild("content",base64_encode($_POST['content']));
 				$buffer = $xml->asXML();
 				unlink("../" . $datafile_url);
 				$file = fopen("../" . $datafile_url,"w");
